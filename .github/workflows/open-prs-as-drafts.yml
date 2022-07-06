@@ -5,6 +5,10 @@ on:
         types: [ opened, reopened ]
     workflow_dispatch:
 
+permissions:
+    contents: read
+    pull-requests: write
+
 jobs:
     mark-as-draft:
         name: Mark as draft
