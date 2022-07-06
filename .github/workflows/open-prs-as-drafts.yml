@@ -1,0 +1,21 @@
+# Marks all newly opened PRs as drafts
+name: Draft PRs on Open
+on:
+    pull_request_target:
+        types: [ opened, reopened ]
+    workflow_dispatch:
+
+jobs:
+    mark-as-draft:
+        name: Mark as draft
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout repo
+                uses: actions/checkout@v3
+                with:
+                    ref: master
+            -   name: Mark as draft
+                uses: ./.github/actions/mark-pr-as-draft
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
